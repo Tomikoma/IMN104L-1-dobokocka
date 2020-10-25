@@ -26,7 +26,7 @@ model = models.Sequential([
   layers.Dropout(0.2),
   layers.Flatten(),
   layers.Dense(256, activation='relu'),
-  layers.Dense(6)
+  layers.Dense(11)
 ])
 
 def train_cnn():

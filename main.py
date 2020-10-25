@@ -29,7 +29,7 @@ def main(path: str):
 
 if __name__ == '__main__':
     main("images/dice.jpg")
-    if len(sys.argv) == 1:
-        exit(0)
+    #if len(sys.argv) == 1:
+        #exit(0)
     #main(sys.argv[1])
-    #train_cnn()
+    train_cnn()
