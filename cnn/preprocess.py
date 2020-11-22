@@ -8,14 +8,14 @@ def preprocess():
     data_dir = pathlib.Path("images")
 
     batch_size = 32
-    img_height = 130
-    img_width = 130
+    img_height = 256
+    img_width = 256
 
 
 
     train_ds = preprocessing.image_dataset_from_directory(
         data_dir,
-        label_mode='categorical',
+        label_mode='int',
         color_mode='grayscale',
         validation_split=0.2,
         subset="training",
@@ -25,7 +25,7 @@ def preprocess():
 
     val_ds = preprocessing.image_dataset_from_directory(
         data_dir,
-        label_mode='categorical',
+        label_mode='int',
         color_mode='grayscale',
         validation_split=0.2,
         subset="validation",
