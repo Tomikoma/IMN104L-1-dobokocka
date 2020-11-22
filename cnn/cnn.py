@@ -78,7 +78,7 @@ def train_cnn():
     print("Saved TFLite model to disk")
 
 def predict_cnn(img_path):
-    model = models.load_model('cnn/model_cnn.h5')
+    model = models.load_model('cnn/model_cnn_2.h5')
 
 
 
@@ -88,6 +88,6 @@ def predict_cnn(img_path):
     predictions = model.predict(img_array)
     highest= 0
     value = 0
-    print(np.argmax(predictions[0])+2)
+    return np.argmax(predictions[0])+2
 
 
