@@ -86,8 +86,6 @@ def predict_cnn(img_path):
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
     predictions = model.predict(img_array)
-    highest= 0
-    value = 0
     return np.argmax(predictions[0])+2
 
 
