@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 from imutils import resize
 
-
-lowerWhite = np.array([25, 0, 0], dtype="uint8")
+lowerWhite = np.array([20, 0, 0], dtype="uint8")
 upperWhite = np.array([200, 25, 250], dtype="uint8")
 
 
@@ -31,7 +30,7 @@ def cropImage(frame, bbox) -> np.ndarray:
     return img
 
 
-def getDiceValue(path: str) -> int:
+def getDiceValue(path: str, debug=False) -> int:
     value = 0
     img = cv2.imread(path)
     img = resize(img, 1000, 1000)
@@ -41,6 +40,8 @@ def getDiceValue(path: str) -> int:
     res = cv2.bitwise_and(img, img, mask=mask)
 
     grayImg = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
+    if debug:
+        cv2.imshow("res",res)
     output = cv2.connectedComponentsWithStats(grayImg, 8)
     nlabels = output[0]
     stats = output[2]
@@ -55,9 +56,9 @@ def getDiceValue(path: str) -> int:
         grayCroppedImage = cv2.cvtColor(croppedImage, cv2.COLOR_BGR2GRAY)
         circles = cv2.HoughCircles(grayCroppedImage, cv2.HOUGH_GRADIENT, 1.05, croppedImage.shape[0] / 4,
                                    param1=125, param2=20,
-                                   minRadius=4, maxRadius=30)
+                                   minRadius=4, maxRadius=25)
         if circles is not None:
-            value += len(circles)
+            value += len(circles[0])
             circles = np.uint16(np.around(circles))
             for i in circles[0, :]:
                 center = (i[0], i[1])
@@ -66,9 +67,8 @@ def getDiceValue(path: str) -> int:
                 # circle outline
                 radius = i[2]
                 cv2.circle(croppedImage, center, radius, (50, 255, 100), 3)
-            #print("Value:", len(circles[0]))
-
-            #cv2.imshow("crop", croppedImage)
-            #cv2.waitKey(0)
+            if debug:
+                cv2.imshow("crop", croppedImage)
+                cv2.waitKey(0)
 
     return value
