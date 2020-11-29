@@ -1,0 +1,21 @@
+Github repo:
+
+https://github.com/Tomikoma/IMN104L-1-dobokocka/
+
+Asztali alkalmazás
+-link:
+https://drive.google.com/file/d/1qiiztB7CnS7WPZj4LNwOL4kYl8QodvuD/view?usp=sharing
+
+-használat:
+telepítés után kép tallózása, majd Neuronháló/Hough körökre nyomva érték felismerése.
+A program mappájában található egy images mappa, ahol tesztképek vannak internetről, illetve általunk készítettek.
+A prezentációban említett felismerés pontosság (68% hough, 72% nn) a általáunk készített képekre értetődik. (aminek a nevében nincs "im")
+
+
+Mobil alkalmazás apk:
+-link:
+https://drive.google.com/file/d/1CPMqBm-Wbkh9G2J5Otw6wGt1EwYG5T4k/view
+
+-használat:
+Feltelepítés után engedélyezni kell külön (beállításon/alkalmazáson keresztül) a kamerát.
+Ezután alkalmazásba lépve a megfelelő gombra nyomja (Hough / Neuron) készíteni kell egy képet, amelyről felismerésre kerül az érték.
