@@ -3,6 +3,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from imutils import resize
 from hough.hough import getDiceValue
 from cnn.cnn import predict_cnn
+import os
 
 import cv2
 
@@ -80,3 +81,25 @@ class DialogWindow(QMainWindow):
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
+
+
+def benchmark(path: str, debug=False):
+    n = 0
+    hough = 0
+    nn = 0
+    for dir in os.listdir(path):
+        realValue = int(dir.split("_")[1])
+
+        for filename in os.listdir(path + "/" + dir) :
+            if "im" in filename:
+                continue
+            # predictedValue = getDiceValue(path + "/" + dir + "/" + filename, debug)
+            n += 1
+            if predict_cnn(path + "/" + dir + "/" + filename) == realValue:
+                nn += 1
+            # print("Érték:",realValue,"|Felismert:",predictedValue, ("JÓ" if predictedValue == realValue else ""))
+            if getDiceValue(path + "/" + dir + "/" + filename) == realValue:
+                hough += 1
+
+    print(hough, "/", n, "=", hough/n)
+    print(nn, "/", n, "=", nn/n)
